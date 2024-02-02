@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Orders">
+    <resultMap id="fullResult" type="Order">
+        <result property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="branch" column="BRANCH"/>
+        <result property="percentage" column="PERCENTAGE"/>
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="fullResult">
+        SELECT * FROM orders;
+    </select>
+
+    <select id="getById" parameterType="int" resultMap="fullResult">
+        SELECT * FROM orders WHERE id = #{id};
+    </select>
+
+    <update id="update" parameterType="Order">
+        UPDATE orders
+        SET
+        EMAIL = #{email},
+        NAME = #{name},
+        BRANCH = #{branch},
+        PERCENTAGE = #{percentage},
+        PHONE = #{phone}
+        WHERE ID = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM orders WHERE ID = #{id};
+    </delete>
+</mapper>
